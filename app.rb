@@ -14,28 +14,34 @@ module Enumerable
       self
     end
 
-    num_arr = [1, 2, 3]
+    
+  def my_select(&prc)
+    selected=[]
+    self.my_each do |el|
+      if prc.call(el)==true
+        selected << el
+      end
+    end
+    selected
+  end
+
     
   puts "--- my_each ---"
-  p num_arr.my_each { |n| n }
-  num_arr.my_each do |n|
-      puts n*2 
-  end
+  [1, 2, 3].my_each {|num| p num*2}
   puts "\n"
 
   puts "--- my_each_with_index ---"
-  p num_arr.my_each_with_index { |n,ind| "#{n} is #{ind}" }
-  num_arr.my_each_with_index do |n,ind|
-    puts "#{n} is #{ind}"
-  end
-
-  puts "\n"
-
   hash = Hash.new
   %w(cat dog wombat).my_each_with_index { |item, index|
   hash[item] = index
   }
-  p hash 
+  p hash  #=> {"cat"=>0, "dog"=>1, "wombat"=>2}
   puts "\n"
+  puts "--- my_select ---"
+  p [1,2,3,4,5].my_select { |num|  num.even?  }   #=> [2, 4]
+
+
+
+
 
   end
