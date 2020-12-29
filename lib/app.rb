@@ -19,7 +19,7 @@ module Enumerable
     end
     list
   end
-  
+
   def my_select
     return enum_for unless block_given?
 
@@ -40,6 +40,7 @@ module Enumerable
     end
     true
   end
+
   def my_any?(arg = nil, &block)
     !my_any?(arg, &block)
   end
@@ -97,4 +98,3 @@ def multiply_els(arr)
   arr.my_inject(:*)
 end
 # rubocop:enable Style/CaseEquality
-
