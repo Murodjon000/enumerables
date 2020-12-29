@@ -44,7 +44,7 @@ module Enumerable
   def my_any?(arg = nil, &block)
     !my_any?(arg, &block)
   end
-  
+
   def my_none?(arg = nil)
     if arg.nil?
       my_each { |ele| return false if arg === ele }
@@ -84,7 +84,6 @@ module Enumerable
   def my_inject(*args)
     reduce = args[0] if args[0].is_a?(Integer)
     operator = args[0].is_a?(Symbol) ? args[0] : args[1]
-  
     if operator
       to_a.my_each { |item| reduce = reduce ? reduce.send(operator, item) : item }
       return reduce
