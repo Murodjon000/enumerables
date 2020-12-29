@@ -170,6 +170,8 @@ module Enumerable
   # Multiply some numbers
   p (5..10).my_inject(1, :*)                          #=> 151200
   # Same using a block
+  p [1, 2, 3].my_inject(0, :+)
+
   p (5..10).my_inject(1) { |product, n| product * n } #=> 151200
   # find the longest word
   longest = %w{ cat sheep bear }.my_inject do |memo, word|
@@ -178,3 +180,12 @@ module Enumerable
   p longest                                        #=> "sheep"
 
   end
+
+  
+  def multiply_els(arr)
+    arr.my_inject(:*)
+  end
+
+  puts "\n"
+  puts "--- my_inject-multp ---"
+  p multiply_els([2,4,5]) #=> 40
