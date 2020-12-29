@@ -59,6 +59,18 @@ module Enumerable
     true
   end
     
+  def my_count(arg = nil, &prc)
+    counted=0
+    if block_given?
+     my_each {|ele| counted+=1 if prc.call(ele)}
+    elsif !block_given? && arg.nil?
+      counted=to_a.length
+    else
+      counted=to_a.my_select {|ele| ele==arg}.length
+    end
+    counted
+  end
+
   puts "--- my_each ---"
   %w[Sharon Leo Leila Brian Arun].my_each { |friend| puts friend }
   puts "\n"
@@ -104,4 +116,10 @@ module Enumerable
   p [nil, false].my_none?                                 #=> true
   p [nil, false, true].my_none?                           #=> false  
 
+  puts "\n"
+  puts "--- my_count ---"
+  ary = [1, 2, 4, 2]
+  p ary.my_count               #=> 4
+  p ary.my_count(2)            #=> 2
+  p ary.my_count { |x| x%2==0 } #=> 3
   end
