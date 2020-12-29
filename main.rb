@@ -1,4 +1,4 @@
-require './app.rb'
+require './lib/app.rb'
 
 puts "--- my_each ---"
 %w[Sharon Leo Leila Brian Arun].my_each { |friend| puts friend }
