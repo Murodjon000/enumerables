@@ -60,6 +60,13 @@ To get a local copy use:<br>
 ```js
 git clone https://github.com/Murodjon000/enumerables.git
 ```
+## Author
+
+👤 **Murodjon000**
+
+- GitHub: [@Murodjon000](https://github.com/Murodjon000)
+- Twitter: [@Murodjon](https://twitter.com/Murodjo91836152)
+- LinkedIn: [murodjon-tursunpulatov](https://www.linkedin.com/in/murodjon-tursunpulatov-5189481b3/)
 
 ### Dependencies
 
@@ -73,15 +80,7 @@ You can do it on [issues page](issues/).
 
 ## Acknowledgments
 
-A special thanks for the code reviewers.
-
-## Author
-
-👤 **Murodjon000**
-
-- GitHub: [@Murodjon000](https://github.com/Murodjon000)
-- Twitter: [@Murodjon](https://twitter.com/Murodjo91836152)
-- LinkedIn: [murodjon-tursunpulatov](https://www.linkedin.com/in/murodjon-tursunpulatov-5189481b3/)
+A special thanks for the code reviewers 
 
 ### License
 
