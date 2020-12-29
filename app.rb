@@ -48,6 +48,16 @@ module Enumerable
     false
   end
 
+ def my_none?(arg = nil, &prc)
+    if arg
+      my_each { |ele| return false if arg === ele } 
+    elsif block_given?
+      my_each { |ele| return false if yield(ele) }
+    else
+      my_each { |ele| return false if ele }
+    end
+    true
+  end
     
   puts "--- my_each ---"
   %w[Sharon Leo Leila Brian Arun].my_each { |friend| puts friend }
@@ -82,6 +92,16 @@ module Enumerable
   p [nil, true, 99].any?(Integer)                     #=> true
   p [nil, true, 99].any?                              #=> true
   p [].any?                                           #=> false
-
+ 
+  puts "\n"
+  puts "--- my_none ---"
+  p %w{ant bear cat}.my_none? { |word| word.length == 5 } #=> true
+  p %w{ant bear cat}.my_none? { |word| word.length >= 4 } #=> false
+  p %w{ant bear cat}.my_none?(/d/)                        #=> true
+  p [1, 3.14, 42].my_none?(Float)                         #=> false
+  p [].my_none?                                           #=> true
+  p [nil].my_none?                                        #=> true
+  p [nil, false].my_none?                                 #=> true
+  p [nil, false, true].my_none?                           #=> false  
 
   end
