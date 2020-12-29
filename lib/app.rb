@@ -1,22 +1,29 @@
 module Enumerable
-  def my_each(&prc)
-    length.times do |i|
-      prc.call(self[i])
+  def my_each
+    return enum_for unless block_given?
+
+    list = is_a?(Range) ? to_a : self
+    list.length.times do |i|
+      yield(list[i])
     end
-    self
+    list
   end
 
-  def my_each_with_index(&prc)
-    length.times do |i|
-      prc.call(self[i], i)
+  def my_each_with_index
+    return enum_for unless block_given?
+
+    list = is_a?(Range) ? to_a : self
+    list.length.times do |i|
+      yield(list[i], i)
     end
-    self
+    list
   end
   
-  def my_select(&prc)
+  def my_select
+    return enum_for unless block_given?
     selected = []
     my_each do |el|
-      selected << el if prc.call(el) == true
+      selected << el if yield(el)
     end
     selected
   end

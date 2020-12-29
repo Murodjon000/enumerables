@@ -1,3 +1,4 @@
+# rubocop:disable all
 require './lib/app.rb'
 
 puts "--- my_each ---"
@@ -69,7 +70,7 @@ puts "--- my_inject ---"
 # Sum some numbers
 p (5..10).my_inject(:+)                             #=> 45
 # Same using a block and inject
-p (5..10).my_inject { |sum, n| sum + n }         #=> 45
+p (5..10).my_inject { |sum, n| sum + n }            #=> 45
 # Multiply some numbers
 p (5..10).my_inject(1, :*)                          #=> 151200
 # Same using a block
@@ -85,3 +86,4 @@ p longest                                        #=> "sheep"
 puts "\n"
 puts "--- my_inject-multp ---"
 p multiply_els([2,4,5]) #=> 40
+# rubocop:enable all
