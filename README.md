@@ -47,7 +47,6 @@ and [Array](https://ruby-doc.org/core-2.4.1/Array.html#method-i-each)
 ### Built With
 
 - Ruby Language <br>
-- Rubocop (Linter)<br>
 - Git, Github and VScode <br>
 
 ## Live Demo
