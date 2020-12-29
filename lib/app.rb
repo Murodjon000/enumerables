@@ -74,9 +74,10 @@ module Enumerable
   end
   
   def my_map(arg = nil, &prc)
+    return enum_for unless block_given?
     list = is_a?(Range) ? to_a : self
     mapped = []
-    if arg
+    if arg.nil?
       list.my_each { |ele| mapped << yield(ele)}
     else
       list.my_each { |ele| mapped << prc.call(ele)}

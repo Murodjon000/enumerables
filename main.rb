@@ -18,12 +18,14 @@ p [1,2,3,4,5].my_select { |num|  num.even?  }   #=> [2, 4]
 puts "\n"
 puts "--- my_all ---"
 
-p %w[ant bear cat].my_all? { |word| word.length >= 3 } #=> true
-p %w[ant bear cat].my_all? { |word| word.length >= 4 } #=> false
-p %w[ant bear cat].my_all?(/t/)                        #=> false
-p [1, 2i, 3.14].my_all?(Numeric)                       #=> true
-p [nil, true, 99].my_all?                              #=> false
-p [].all?                                              #=> true
+p %w[ant bear cat].all? { |word| word.length >= 3 } #=> true
+p %w[ant bear cat].all? { |word| word.length >= 4 } #=> false
+p %w[ant bear cat].all?(/t/)                        #=> false
+p [1, 2i, 3.14].all?(Numeric)                       #=> true
+p [nil, true, 99].all?                              #=> false
+p [].all?                                           #=> true
+p [1, 'string', true].all?
+p [1, 'string', nil].all?
 
 puts "\n"
 puts "--- my_any ---"
@@ -34,7 +36,9 @@ p %w[ant bear cat].any?(/d/)                        #=> false
 p [nil, true, 99].any?(Integer)                     #=> true
 p [nil, true, 99].any?                              #=> true
 p [].any?                                           #=> false
- 
+p [1, false, nil].any?                              #=> true
+p [nil, false, nil].any?                            #=> false
+p [1, false, nil].any?(Numeric)                     #=> true 
 puts "\n"
 puts "--- my_none ---"
 p %w{ant bear cat}.my_none? { |word| word.length == 5 } #=> true
@@ -44,7 +48,9 @@ p [1, 3.14, 42].my_none?(Float)                         #=> false
 p [].my_none?                                           #=> true
 p [nil].my_none?                                        #=> true
 p [nil, false].my_none?                                 #=> true
-p [nil, false, true].my_none?                           #=> false  
+p [nil, false, true].my_none?                           #=> false 
+p [nil, nil, nil].none?                                #=> true
+p [1, 'string', true].none?                           #=> false   
 
 puts "\n"
 puts "--- my_count ---"
