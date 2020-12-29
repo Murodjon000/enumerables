@@ -1,3 +1,4 @@
+# rubocop:disable Style/CaseEquality
 module Enumerable
   def my_each
     return enum_for unless block_given?
@@ -84,7 +85,7 @@ module Enumerable
     end
     mapped
   end
-
+  # rubocop:disable Metrics/CyclomaticComplexity
   def my_inject(*args)
     reduce = args[0] if args[0].is_a?(Integer)
     operator = args[0].is_a?(Symbol) ? args[0] : args[1]
@@ -96,10 +97,11 @@ module Enumerable
     to_a.my_each { |item| reduce = reduce ? yield(reduce, item) : item }
     reduce
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
 
 def multiply_els(arr)
   arr.my_inject(:*)
 end
-
+# rubocop:enable Style/CaseEquality
 
