@@ -71,6 +71,13 @@ module Enumerable
     counted
   end
 
+  def my_map
+    mapped=[]
+    self.to_a.my_each {|ele| mapped << yield(ele)}
+    mapped
+  end
+
+
   puts "--- my_each ---"
   %w[Sharon Leo Leila Brian Arun].my_each { |friend| puts friend }
   puts "\n"
@@ -122,4 +129,11 @@ module Enumerable
   p ary.my_count               #=> 4
   p ary.my_count(2)            #=> 2
   p ary.my_count { |x| x%2==0 } #=> 3
+
+  puts "\n"
+  puts "--- my_map ---"
+
+  p ((1..4).my_map { |i| i * i })     #=> [1, 4, 9, 16]  
+
+  
   end
