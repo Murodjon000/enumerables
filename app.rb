@@ -72,14 +72,29 @@ module Enumerable
   end
 
   def my_map(arg = nil,&prc)
+    list = is_a?(Range) ? to_a : self
     mapped=[]
     if arg
-      self.to_a.my_each {|ele| mapped << yield(ele)}
+      list.my_each {|ele| mapped << yield(ele)}
     else
-      self.to_a.my_each {|ele| mapped << prc.call(ele)}
+      list.my_each {|ele| mapped << prc.call(ele)}
     end
     mapped
   end
+
+  def my_inject(*args)
+    
+    reduce = args[0] if args[0].is_a?(Integer)
+    operator = args[0].is_a?(Symbol) ? args[0] : args[1]
+
+    if operator
+      to_a.my_each { |item| reduce = reduce ? reduce.send(operator, item) : item }
+      return reduce
+    end
+    to_a.my_each { |item| reduce = reduce ? yield(reduce, item) : item }
+    reduce
+  end
+
 
 
   puts "--- my_each ---"
@@ -139,9 +154,27 @@ module Enumerable
 
   p ((1..4).my_map { |i| i * i })     #=> [1, 4, 9, 16]  
 
+  puts "\n"
+
   puts 'my_map_proc'
   my_proc = proc { |i| i * i }
   puts (1..4).my_map(my_proc) { |i| i * i } #=> [1, 4, 9, 16] 
 
+  puts "\n"
+  puts "--- my_inject ---"
+
+  # Sum some numbers
+  p (5..10).my_inject(:+)                             #=> 45
+  # Same using a block and inject
+  p (5..10).my_inject { |sum, n| sum + n }         #=> 45
+  # Multiply some numbers
+  p (5..10).my_inject(1, :*)                          #=> 151200
+  # Same using a block
+  p (5..10).my_inject(1) { |product, n| product * n } #=> 151200
+  # find the longest word
+  longest = %w{ cat sheep bear }.my_inject do |memo, word|
+   memo.length > word.length ? memo : word
+  end
+  p longest                                        #=> "sheep"
 
   end
