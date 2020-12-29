@@ -22,13 +22,14 @@ module Enumerable
   
   def my_select
     return enum_for unless block_given?
+
     selected = []
     my_each do |el|
       selected << el if yield(el)
     end
     selected
   end
-  
+
   def my_all?(arg = nil)
     if arg.nil?
       my_each { |ele| return false unless arg === ele }
@@ -39,7 +40,6 @@ module Enumerable
     end
     true
   end
-
   def my_any?(arg = nil, &block)
     !my_any?(arg, &block)
   end
@@ -54,7 +54,7 @@ module Enumerable
     end
     true
   end
-  
+
   def my_count(arg = nil, &prc)
     counted = 0
     if block_given?
@@ -62,23 +62,24 @@ module Enumerable
     elsif !block_given? && arg.nil?
       counted = to_a.length
     else
-      counted = to_a.my_select { |ele| ele == arg}.length
+      counted = to_a.my_select { |ele| ele == arg }.length
     end
     counted
   end
-  
+
   def my_map(arg = nil, &prc)
     return enum_for unless block_given?
+
     list = is_a?(Range) ? to_a : self
     mapped = []
     if arg.nil?
-      list.my_each { |ele| mapped << yield(ele)}
+      list.my_each { |ele| mapped << yield(ele) }
     else
-      list.my_each { |ele| mapped << prc.call(ele)}
+      list.my_each { |ele| mapped << prc.call(ele) }
     end
     mapped
   end
-  # rubocop:disable Metrics/CyclomaticComplexity
+
   def my_inject(*args)
     reduce = args[0] if args[0].is_a?(Integer)
     operator = args[0].is_a?(Symbol) ? args[0] : args[1]
@@ -90,7 +91,6 @@ module Enumerable
     to_a.my_each { |item| reduce = reduce ? yield(reduce, item) : item }
     reduce
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
 end
 
 def multiply_els(arr)
