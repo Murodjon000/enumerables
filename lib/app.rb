@@ -30,7 +30,7 @@ module Enumerable
   end
   
   def my_all?(arg = nil)
-    if arg
+    if arg.nil?
       my_each { |ele| return false unless arg === ele }
     elsif block_given?
       my_each { |ele| return false unless yield(ele) }
@@ -40,19 +40,12 @@ module Enumerable
     true
   end
 
-  def my_any?(arg = nil)
-    if arg
-      my_each { |ele| return true unless arg === ele }
-    elsif block_given?
-      my_each { |ele| return true unless yield(ele) }
-    else
-      my_each { |ele| return true unless ele }
-    end
-    false
+  def my_any?(arg = nil, &block)
+    !my_any?(arg, &block)
   end
   
   def my_none?(arg = nil)
-    if arg
+    if arg.nil?
       my_each { |ele| return false if arg === ele }
     elsif block_given?
       my_each { |ele| return false if yield(ele) }

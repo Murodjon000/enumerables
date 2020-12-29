@@ -41,16 +41,16 @@ p [nil, false, nil].any?                            #=> false
 p [1, false, nil].any?(Numeric)                     #=> true 
 puts "\n"
 puts "--- my_none ---"
-p %w{ant bear cat}.my_none? { |word| word.length == 5 } #=> true
-p %w{ant bear cat}.my_none? { |word| word.length >= 4 } #=> false
-p %w{ant bear cat}.my_none?(/d/)                        #=> true
-p [1, 3.14, 42].my_none?(Float)                         #=> false
-p [].my_none?                                           #=> true
-p [nil].my_none?                                        #=> true
-p [nil, false].my_none?                                 #=> true
-p [nil, false, true].my_none?                           #=> false 
-p [nil, nil, nil].none?                                #=> true
-p [1, 'string', true].none?                           #=> false   
+p %w{ant bear cat}.none? { |word| word.length == 5 } #=> true
+p %w{ant bear cat}.none? { |word| word.length >= 4 } #=> false
+p %w{ant bear cat}.none?(/d/)                        #=> true
+p [1, 3.14, 42].none?(Float)                         #=> false
+p [].none?                                           #=> true
+p [nil].none?                                        #=> true
+p [nil, false].none?                                 #=> true
+p [nil, false, true].none?                           #=> false
+p [nil, nil, nil].none?                              #=> true
+p [1, 'string', true].none?                          #=> false   
 
 puts "\n"
 puts "--- my_count ---"
