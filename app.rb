@@ -37,6 +37,16 @@ module Enumerable
     true
   end
 
+  def my_any?(arg = nil, &prc)
+    if arg
+      my_each { |ele| return true unless arg === ele } 
+    elsif block_given?
+      my_each { |ele| return true unless yield(ele) }
+    else
+      my_each { |ele| return true unless ele }
+    end
+    false
+  end
 
     
   puts "--- my_each ---"
@@ -63,6 +73,15 @@ module Enumerable
   p [nil, true, 99].my_all?                              #=> false
   p [].all?                                              #=> true
 
-  
+  puts "\n"
+  puts "--- my_any ---"
+
+  p %w[ant bear cat].any? { |word| word.length >= 3 } #=> true
+  p %w[ant bear cat].any? { |word| word.length >= 4 } #=> true
+  p %w[ant bear cat].any?(/d/)                        #=> false
+  p [nil, true, 99].any?(Integer)                     #=> true
+  p [nil, true, 99].any?                              #=> true
+  p [].any?                                           #=> false
+
 
   end
