@@ -71,9 +71,13 @@ module Enumerable
     counted
   end
 
-  def my_map
+  def my_map(arg = nil,&prc)
     mapped=[]
-    self.to_a.my_each {|ele| mapped << yield(ele)}
+    if arg
+      self.to_a.my_each {|ele| mapped << yield(ele)}
+    else
+      self.to_a.my_each {|ele| mapped << prc.call(ele)}
+    end
     mapped
   end
 
@@ -135,5 +139,9 @@ module Enumerable
 
   p ((1..4).my_map { |i| i * i })     #=> [1, 4, 9, 16]  
 
-  
+  puts 'my_map_proc'
+  my_proc = proc { |i| i * i }
+  puts (1..4).my_map(my_proc) { |i| i * i } #=> [1, 4, 9, 16] 
+
+
   end
