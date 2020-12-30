@@ -67,8 +67,8 @@ p ((1..4).my_map { |i| i * i })     #=> [1, 4, 9, 16]
 puts "\n"
 
 puts 'my_map_proc'
-my_proc = proc { |i| i * i }
-puts (1..4).my_map(my_proc) { |i| i * i } #=> [1, 4, 9, 16] 
+my_proc = proc { |i| i + i }
+puts (1..3).my_map(my_proc) { |i| i + i } #=> [1, 4, 9, 16] 
 
 puts "\n"
 puts "--- my_inject ---"

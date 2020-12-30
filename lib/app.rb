@@ -7,7 +7,7 @@ module Enumerable
     list.length.times do |i|
       yield(list[i])
     end
-    list
+    self
   end
 
   def my_each_with_index
@@ -17,7 +17,7 @@ module Enumerable
     list.length.times do |i|
       yield(list[i], i)
     end
-    list
+    self
   end
 
   def my_select
@@ -31,7 +31,7 @@ module Enumerable
   end
 
   def my_all?(arg = nil)
-    if arg.nil?
+    if arg
       my_each { |ele| return false unless arg === ele }
     elsif block_given?
       my_each { |ele| return false unless yield(ele) }
@@ -41,19 +41,19 @@ module Enumerable
     true
   end
 
-  def my_any?(arg = nil, &block)
-    !my_any?(arg, &block)
+  def my_any?(arg = nil)
+    if arg
+      my_each { |ele| return true if arg === ele } # rubocop:disable Style/CaseEquality
+    elsif block_given?
+      my_each { |ele| return true if yield(ele) }
+    else
+      my_each { |ele| return true if ele }
+    end
+    false
   end
 
-  def my_none?(arg = nil)
-    if arg.nil?
-      my_each { |ele| return false if arg === ele }
-    elsif block_given?
-      my_each { |ele| return false if yield(ele) }
-    else
-      my_each { |ele| return false if ele }
-    end
-    true
+  def my_none?(arg = nil , &block)
+    !my_any?(arg, &block)
   end
 
   def my_count(arg = nil, &prc)
