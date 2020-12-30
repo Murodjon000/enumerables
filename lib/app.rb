@@ -21,7 +21,7 @@ module Enumerable
 
     arr ||= to_a
     while idx < arr.length
-      yield(arr[idx],idx)
+      yield(arr[idx], idx)
       idx += 1
     end
 
