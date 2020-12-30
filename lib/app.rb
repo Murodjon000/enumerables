@@ -76,15 +76,15 @@ module Enumerable
     counted
   end
 
-  def my_map(arg = nil, &prc)
+  def my_map(proc = nil)
     return enum_for unless block_given?
 
     list = is_a?(Range) ? to_a : self
     mapped = []
-    if arg.nil?
-      list.my_each { |ele| mapped << yield(ele) }
+    if proc
+      list.my_each { |ele| mapped << proc.call(ele) }
     else
-      list.my_each { |ele| mapped << prc.call(ele) }
+      list.my_each { |ele| mapped << yield(ele) }
     end
     mapped
   end

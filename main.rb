@@ -67,8 +67,12 @@ p ((1..4).my_map { |i| i * i })     #=> [1, 4, 9, 16]
 puts "\n"
 
 puts 'my_map_proc'
-my_proc = proc { |i| i + i }
-puts (1..3).my_map(my_proc) { |i| i + i } #=> [1, 4, 9, 16] 
+ 
+my_proc = proc { |num| num > 3 }
+
+p [2,3,4,5].my_map(my_proc) { |num| num < 3 }
+
+# => [false, false, true true]
 
 puts "\n"
 puts "--- my_inject ---"
