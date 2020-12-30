@@ -3,20 +3,28 @@ module Enumerable
   def my_each
     return enum_for unless block_given?
 
-    list = is_a?(Range) ? to_a : self
-    list.length.times do |i|
-      yield(list[i])
+    idx = 0
+
+    arr ||= to_a
+    while idx < arr.length
+      yield(arr[idx])
+      idx += 1
     end
+
     self
   end
 
   def my_each_with_index
     return enum_for unless block_given?
 
-    list = is_a?(Range) ? to_a : self
-    list.length.times do |i|
-      yield(list[i], i)
+    idx = 0
+
+    arr ||= to_a
+    while idx < arr.length
+      yield(arr[idx],idx)
+      idx += 1
     end
+
     self
   end
 

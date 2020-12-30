@@ -92,4 +92,6 @@ p longest                                        #=> "sheep"
 puts "\n"
 puts "--- my_inject-multp ---"
 p multiply_els([2,4,5]) #=> 40
+{1=>1, 2=>2, 3=>3}.my_each { |k, v| puts k, v }
+
 # rubocop:enable all
